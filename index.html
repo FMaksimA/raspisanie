@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Моё расписание</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Верхняя часть -->
+        <header class="header">
+
+            <div class="header-left">
+                <div class="logo">
+                    <span>📚</span>
+                </div>
+
+                <div>
+                    <h1>Расписание</h1>
+                    <p>Учебные занятия</p>
+                </div>
+            </div>
+
+            <div class="header-right">
+
+                <div class="current-date" id="currentDate">
+                    Сегодня
+                </div>
+
+                <button class="today-button" id="todayButton">
+                    Сегодня
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- Управление неделей -->
+        <section class="week-control">
+
+            <div class="week-info">
+
+                <div class="week-icon">
+                    📅
+                </div>
+
+                <div>
+                    <span class="week-label">Учебная неделя</span>
+
+                    <strong id="weekTitle">
+                        Чётная неделя
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="week-settings">
+
+                <!-- Переключатель -->
+                <div class="week-switch">
+
+                    <button
+                        class="week-button active"
+                        id="evenButton"
+                        data-week="even">
+                        Чётная
+                    </button>
+
+                    <button
+                        class="week-button"
+                        id="oddButton"
+                        data-week="odd">
+                        Нечётная
+                    </button>
+
+                </div>
+
+
+                <!-- Текущая неделя -->
+                <label class="current-week">
+
+                    <input
+                        type="checkbox"
+                        id="currentWeekCheckbox">
+
+                    <span class="checkmark"></span>
+
+                    <span>
+                        Для текущей недели
+                    </span>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- Информация -->
+        <div class="week-status" id="weekStatus">
+            Выбрана чётная учебная неделя
+        </div>
+
+
+        <!-- Расписание -->
+        <main id="schedule" class="schedule">
+
+            <!-- JavaScript вставит расписание сюда -->
+
+        </main>
+
+
+        <!-- Подвал -->
+        <footer>
+
+            <p>
+                Расписание учебных занятий
+            </p>
+
+            <span id="footerWeek">
+                Чётная неделя
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

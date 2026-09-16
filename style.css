@@ -1,0 +1,647 @@
+/* =========================
+   ОСНОВНЫЕ НАСТРОЙКИ
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #f4f7fb;
+    --card: #ffffff;
+    --text: #172033;
+    --secondary: #718096;
+    --border: #e6ebf2;
+
+    --primary: #2563eb;
+    --primary-light: #eff6ff;
+
+    --shadow:
+        0 10px 30px rgba(31, 41, 55, 0.07);
+
+    --radius: 18px;
+}
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: var(--background);
+    color: var(--text);
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   ОСНОВНОЙ КОНТЕЙНЕР
+========================= */
+
+.app {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 35px 0 50px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 15px;
+
+    background: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.header h1 {
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    margin-top: 4px;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.current-date {
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.today-button {
+    border: none;
+    background: white;
+
+    padding: 11px 18px;
+
+    border-radius: 12px;
+
+    color: var(--primary);
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: var(--shadow);
+
+    transition: 0.2s;
+}
+
+.today-button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 25px rgba(31, 41, 55, 0.12);
+}
+
+
+/* =========================
+   WEEK CONTROL
+========================= */
+
+.week-control {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 22px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 15px;
+}
+
+.week-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.week-icon {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 13px;
+
+    background: var(--primary-light);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.week-label {
+    display: block;
+
+    color: var(--secondary);
+
+    font-size: 13px;
+
+    margin-bottom: 3px;
+}
+
+.week-info strong {
+    font-size: 17px;
+}
+
+
+/* =========================
+   WEEK BUTTONS
+========================= */
+
+.week-settings {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.week-switch {
+    display: flex;
+
+    background: #f1f4f8;
+
+    padding: 4px;
+
+    border-radius: 11px;
+}
+
+.week-button {
+    border: none;
+
+    background: transparent;
+
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    color: var(--secondary);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.week-button.active {
+    background: white;
+
+    color: var(--primary);
+
+    box-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.current-week {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #4a5568;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.current-week input {
+    display: none;
+}
+
+.checkmark {
+    width: 19px;
+    height: 19px;
+
+    border: 2px solid #cbd5e0;
+
+    border-radius: 5px;
+
+    position: relative;
+
+    transition: 0.2s;
+}
+
+.current-week input:checked + .checkmark {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.current-week input:checked + .checkmark::after {
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+    height: 9px;
+
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+
+    transform: rotate(45deg);
+
+    left: 5px;
+    top: 2px;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.week-status {
+    color: var(--secondary);
+
+    font-size: 13px;
+
+    margin: 15px 4px 25px;
+}
+
+
+/* =========================
+   DAY
+========================= */
+
+.day {
+    margin-bottom: 32px;
+}
+
+.day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+.day-name {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.day-date {
+    color: var(--secondary);
+
+    font-size: 13px;
+}
+
+.day-header-line {
+    height: 1px;
+
+    flex: 1;
+
+    background: var(--border);
+}
+
+
+/* =========================
+   LESSON
+========================= */
+
+.lesson {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 17px 20px;
+
+    display: grid;
+
+    grid-template-columns: 75px 1fr auto;
+
+    gap: 20px;
+
+    align-items: center;
+
+    margin-bottom: 9px;
+
+    box-shadow:
+        0 4px 15px rgba(31, 41, 55, 0.035);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.lesson:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(31, 41, 55, 0.08);
+}
+
+
+/* =========================
+   TIME
+========================= */
+
+.lesson-time {
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: var(--primary);
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   LESSON INFO
+========================= */
+
+.lesson-main {
+    min-width: 0;
+}
+
+.lesson-title {
+    font-size: 16px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    text-transform: uppercase;
+}
+
+.lesson-details {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    color: var(--secondary);
+
+    font-size: 13px;
+}
+
+.lesson-type {
+    display: inline-flex;
+
+    align-items: center;
+
+    background: #f0f3f7;
+
+    padding: 5px 9px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    color: #64748b;
+}
+
+
+/* =========================
+   ROOM
+========================= */
+
+.lesson-room {
+    color: #64748b;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+.room-icon {
+    margin-right: 4px;
+}
+
+
+/* =========================
+   EMPTY DAY
+========================= */
+
+.empty-day {
+    background: white;
+
+    border: 1px dashed #d8dee8;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: var(--secondary);
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   CURRENT DAY
+========================= */
+
+.day.today .day-name {
+    color: var(--primary);
+}
+
+.day.today .day-header::before {
+    content: "СЕГОДНЯ";
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    padding: 4px 8px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    margin-top: 20px;
+
+    padding-top: 25px;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--secondary);
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+.lesson {
+    animation: appear 0.35s ease both;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .app {
+        width: min(100% - 24px, 650px);
+        padding-top: 20px;
+    }
+
+    .header {
+        align-items: flex-start;
+    }
+
+    .header-right {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+    }
+
+    .current-date {
+        display: none;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .week-control {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .week-settings {
+        justify-content: space-between;
+    }
+
+    .lesson {
+        grid-template-columns: 65px 1fr;
+        gap: 14px;
+    }
+
+    .lesson-room {
+        grid-column: 2;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .week-settings {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .week-switch {
+        width: 100%;
+    }
+
+    .week-button {
+        flex: 1;
+    }
+
+    .lesson {
+        padding: 15px;
+
+        grid-template-columns: 60px 1fr;
+    }
+
+    .lesson-title {
+        font-size: 14px;
+    }
+
+    .day-name {
+        font-size: 17px;
+    }
+}
