@@ -595,13 +595,41 @@ footer {
         justify-content: space-between;
     }
 
+    /* Исправление карточки занятия */
     .lesson {
-        grid-template-columns: 65px 1fr;
-        gap: 14px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 16px;
+    }
+
+    .lesson-time {
+        position: static !important;
+        width: auto;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .lesson-main {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .lesson-title {
+        overflow-wrap: anywhere;
+    }
+
+    .lesson-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
     }
 
     .lesson-room {
-        grid-column: 2;
+        grid-column: 1;
+        width: 100%;
+        margin-top: 2px;
     }
 
     footer {
@@ -633,12 +661,15 @@ footer {
 
     .lesson {
         padding: 15px;
-
-        grid-template-columns: 60px 1fr;
+        grid-template-columns: 1fr;
     }
 
     .lesson-title {
         font-size: 14px;
+    }
+
+    .lesson-time {
+        font-size: 16px;
     }
 
     .day-name {
