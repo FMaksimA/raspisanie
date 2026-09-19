@@ -429,206 +429,184 @@ function getMonday(date = new Date()) {
 ===================================================== */
 
 function renderSchedule(weekType) {
+    const scheduleElement = document.getElementById("schedule");
+    const schedule = scheduleData[weekType];
 
-    const scheduleElement =
-        document.getElementById("schedule");
-
-    // Получаем расписание выбранной недели
-    const schedule =
-        scheduleData[weekType];
-
-    // Очищаем старое расписание
     scheduleElement.innerHTML = "";
 
+    // ==========================================
+    // ОПРЕДЕЛЯЕМ СЕГОДНЯШНИЙ ДЕНЬ
+    // ==========================================
 
-    const monday =
-        getMonday();
+    const today = new Date().getDay();
 
+    const dayOrder = {
+        0: "sunday",
+        1: "monday",
+        2: "tuesday",
+        3: "wednesday",
+        4: "thursday",
+        5: "friday",
+        6: "saturday"
+    };
 
-    days.forEach(
-        (day, index) => {
+    const todayId = dayOrder[today];
 
-            const dayContainer =
-                document.createElement("section");
-
-            dayContainer.className =
-                "day";
-
-
-            /*
-                Проверяем сегодняшний день
-            */
-
-            const today =
-                new Date();
-
-            const currentDay =
-                today.getDay();
-
-            const isToday =
-                index + 1 === currentDay;
+    // Находим сегодняшний день в нашем массиве days
+    const todayDay = days.find(day => day.id === todayId);
 
 
-            if (isToday) {
-                dayContainer.classList.add("today");
-            }
+    // ==========================================
+    // ОТДЕЛЬНЫЙ БЛОК "СЕГОДНЯ"
+    // ==========================================
 
+    if (todayDay) {
+        const todayLessons = schedule[todayDay.id] || [];
 
-            /*
-                Дата конкретного дня
-            */
+        const todayContainer = document.createElement("section");
+        todayContainer.className = "today-schedule";
 
-            const dayDate =
-                new Date(monday);
+        todayContainer.innerHTML = `
+            <div class="today-header">
+                <div class="today-title">
+                    Сегодня
+                </div>
 
-            dayDate.setDate(
-                monday.getDate() + index
-            );
+                <div class="today-day-name">
+                    ${todayDay.name}
+                </div>
+            </div>
+        `;
 
+        if (todayLessons.length === 0) {
 
-            /*
-                Заголовок дня
-            */
+            const emptyMessage = document.createElement("div");
+            emptyMessage.className = "no-lessons";
+            emptyMessage.textContent = "Занятий сегодня нет";
 
-            const header =
-                document.createElement("div");
+            todayContainer.appendChild(emptyMessage);
 
-            header.className =
-                "day-header";
+        } else {
 
+            todayLessons.forEach(lesson => {
 
-            header.innerHTML = `
+                const lessonElement = document.createElement("div");
+                lessonElement.className = "lesson";
 
-                <span class="day-name">
-                    ${day.name}
-                </span>
+                lessonElement.innerHTML = `
+                    <div class="lesson-time">
+                        ${lesson.time}
+                    </div>
 
-                <span class="day-date">
-                    ${formatDate(dayDate)}
-                </span>
-
-                ${
-                    isToday
-                        ? `<span class="today-label">
-                            СЕГОДНЯ
-                           </span>`
-                        : ""
-                }
-
-                <span class="day-header-line"></span>
-
-            `;
-
-
-            dayContainer.appendChild(
-                header
-            );
-
-
-            /*
-                Получаем занятия
-                именно выбранной недели
-            */
-
-            const lessons =
-                schedule[day.id] || [];
-
-
-            /*
-                Если занятий нет
-            */
-
-            if (lessons.length === 0) {
-
-                const empty =
-                    document.createElement("div");
-
-                empty.className =
-                    "empty-day";
-
-                empty.textContent =
-                    "Занятий нет";
-
-                dayContainer.appendChild(
-                    empty
-                );
-
-            }
-
-
-            /*
-                Выводим занятия
-            */
-
-            lessons.forEach(
-                lesson => {
-
-                    const lessonElement =
-                        document.createElement("div");
-
-                    lessonElement.className =
-                        "lesson";
-
-
-                    lessonElement.innerHTML = `
-
-                        <div class="lesson-time">
-                            ${lesson.time}
+                    <div class="lesson-main">
+                        <div class="lesson-title">
+                            ${lesson.subject}
                         </div>
 
-
-                        <div class="lesson-main">
-
-                            <div class="lesson-title">
-                                ${lesson.subject}
-                            </div>
-
-
-                            <div class="lesson-details">
-
-                                <span class="lesson-type">
-                                    ${lesson.type}
-                                </span>
-
-                                <span>
-                                    ${lesson.teacher}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="lesson-room">
-
-                            <span class="room-icon">
-                                📍
+                        <div class="lesson-details">
+                            <span class="lesson-type">
+                                ${lesson.type}
                             </span>
 
-                            ауд. ${lesson.room}
+                            <span>
+                                ${lesson.teacher}
+                            </span>
+                        </div>
+                    </div>
 
+                    <div class="lesson-room">
+                        <span class="room-icon">
+                            📍
+                        </span>
+                        ауд. ${lesson.room}
+                    </div>
+                `;
+
+                todayContainer.appendChild(lessonElement);
+            });
+        }
+
+        scheduleElement.appendChild(todayContainer);
+    }
+
+
+    // ==========================================
+    // ОСНОВНОЕ РАСПИСАНИЕ
+    // ==========================================
+
+    const mainTitle = document.createElement("div");
+    mainTitle.className = "main-schedule-title";
+    mainTitle.textContent = "Основное расписание";
+
+    scheduleElement.appendChild(mainTitle);
+
+
+    days.forEach(day => {
+
+        const lessons = schedule[day.id] || [];
+
+        const dayContainer = document.createElement("section");
+        dayContainer.className = "day";
+
+        dayContainer.innerHTML = `
+            <div class="day-header">
+                <div class="day-name">
+                    ${day.name}
+                </div>
+            </div>
+        `;
+
+        if (lessons.length === 0) {
+
+            const emptyMessage = document.createElement("div");
+            emptyMessage.className = "no-lessons";
+            emptyMessage.textContent = "Занятий нет";
+
+            dayContainer.appendChild(emptyMessage);
+
+        } else {
+
+            lessons.forEach(lesson => {
+
+                const lessonElement = document.createElement("div");
+                lessonElement.className = "lesson";
+
+                lessonElement.innerHTML = `
+                    <div class="lesson-time">
+                        ${lesson.time}
+                    </div>
+
+                    <div class="lesson-main">
+                        <div class="lesson-title">
+                            ${lesson.subject}
                         </div>
 
-                    `;
+                        <div class="lesson-details">
+                            <span class="lesson-type">
+                                ${lesson.type}
+                            </span>
 
+                            <span>
+                                ${lesson.teacher}
+                            </span>
+                        </div>
+                    </div>
 
-                    dayContainer.appendChild(
-                        lessonElement
-                    );
+                    <div class="lesson-room">
+                        <span class="room-icon">
+                            📍
+                        </span>
+                        ауд. ${lesson.room}
+                    </div>
+                `;
 
-                }
-            );
-
-
-            scheduleElement.appendChild(
-                dayContainer
-            );
-
+                dayContainer.appendChild(lessonElement);
+            });
         }
-    );
 
+        scheduleElement.appendChild(dayContainer);
+    });
 }
-
 
 /* =====================================================
    ОБНОВЛЕНИЕ ИНФОРМАЦИИ О НЕДЕЛЕ
