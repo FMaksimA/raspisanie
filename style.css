@@ -676,3 +676,37 @@ footer {
         font-size: 17px;
     }
 }
+/* =========================
+   TODAY SCHEDULE
+========================= */
+
+.today-schedule {
+    margin-bottom: 30px;
+}
+
+.today-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.today-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.today-day-name {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #e8f0ff;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.main-schedule-title {
+    margin: 30px 0 20px;
+    font-size: 22px;
+    font-weight: 700;
+}
