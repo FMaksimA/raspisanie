@@ -47,7 +47,7 @@ const scheduleData = {
                 subject: "Р-НАВИГ.СИСТЕМЫ",
                 type: "Лекция",
                 teacher: "Безруков А.В.",
-                room: "319а"
+                room: "313а"
             },
             
 
